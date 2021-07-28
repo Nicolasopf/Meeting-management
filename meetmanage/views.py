@@ -6,6 +6,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views import View
 from .forms import LoginForm, SignUpForm
+from rest_framework.authtoken.models import Token
 
 
 def index(request):
@@ -13,7 +14,10 @@ def index(request):
     context = {}
     context['login'] = LoginForm()
     context['signup'] = SignUpForm()
+    if request.user.is_authenticated:
+        return redirect("/panel")
     return render(request, 'meetmanage/index.html', context)
+
 
 class Panel(View):
     '''
@@ -21,12 +25,16 @@ class Panel(View):
     As is no needed to use multiple views for login and signup, we can receive
     posts here, so user is always being redirected to panel after login/register.
     '''
+    context = {}
+
     def get(self, request):
         ''' Panel to show the reservations. '''
         if not request.user.is_authenticated:
             return redirect("/")
-        # Needs to be replaced for the panel html
-        return HttpResponse("GET WORKING")
+
+        user = User.objects.filter(username=request.user).first()
+        self.context['token'], created = Token.objects.get_or_create(user=user)
+        return render(request, 'meetmanage/panel.html', self.context)
 
     def post(self, request):
         ''' When log in or sign up.'''
@@ -49,13 +57,15 @@ class Panel(View):
 
                 user = authenticate(username='a', password='1234')
                 print(user)
-                if not user: # If credentials wrong.
+                if not user:  # If credentials wrong.
                     messages.error(request, "Incorrect credentials.")
                     return redirect('/')
 
                 login(request, user)
                 # Needs to be replaced for the panel html
-                return HttpResponse("YOU ARE RIGHT!")
+                self.context['token'], created = Token.objects.get_or_create(
+                    user=user)
+                return render(request, 'meetmanage/panel.html', self.context)
 
         # Email exists so try to signup:
         signup = SignUpForm(post)
@@ -67,16 +77,20 @@ class Panel(View):
             email = signup_data['email']
             password = signup_data['password']
 
-            if User.objects.filter(username = username).first():
+            if User.objects.filter(username=username).first():
                 messages.error(request, "This username is already taken")
                 return redirect('/')
-            elif User.objects.filter(email = email).first():
+            elif User.objects.filter(email=email).first():
                 messages.error(request, "This email is already taken")
                 return redirect('/')
 
-            user = User.objects.create_user(username=username, email=email, first_name=first_name, last_name=last_name, password=password)
+            user = User.objects.create_user(
+                username=username, email=email, first_name=first_name, last_name=last_name, password=password)
             user.save()
             login(request, user)
 
+            self.context['token'], created = Token.objects.get_or_create(
+                user=user)
+
         # Needs to be replaced for the panel html
-        return HttpResponse("POST WORKING")
+        return render(request, 'meetmanage/panel.html', self.context)
