@@ -16,9 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from meetmanage import views
+from django.urls import include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index),
     path('panel', views.Panel.as_view()),
+    path('', include('api.urls'))
 ]
