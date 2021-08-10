@@ -1,11 +1,37 @@
 <!DOCTYPE html>
 <html>
   <head>
-	<title>Page Title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>My meetings - ACME</title>
+	<link href="https://js-practice.nicolasopf.repl.co/general.css" rel="stylesheet" type="text/css" />
+    <link href="https://js-practice.nicolasopf.repl.co/panel/panel.css" rel="stylesheet" type="text/css" />
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Andada+Pro:ital@0;1&family=Hahmlet:wght@500&display=swap" rel="stylesheet">
+   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://js-practice.nicolasopf.repl.co/panel/panel.js"></script>
   </head>
-  <body>
-	<h1>My First Heading</h1>
-	<p>My first paragraph.</p>
+  <body class="body">
+	<h1 class="firsttitle"> Meetings Management </h1>
+	<p id="description"> Reserve rooms and schedule your meetings </p>
+	<nav>
+	  <a href="/panel">My Meetings</a>
+	  <a href="/new">New Meeting</a>
+	  <a href="/logout">Log Out</a>
+	  <a href="#"></a>
+	  <div class="animation start-home"></div>
+	</nav>
+    <div class="wrapper">
+	  <table class="meetings" id="table" border="1">
+		<tr>
+		  <th>Room</th>
+		  <th>Starts at</th>
+		  <th>Ends at</th>
+		  <th>Settings</th>
+		</tr>
+	  </table>
+    </div>
 	<script>
 	  localStorage.setItem('Token', '{{ token }}');
 	</script>
