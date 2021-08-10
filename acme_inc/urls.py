@@ -20,7 +20,11 @@ from django.urls import include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.index),
+    path('', views.Index.as_view()),
     path('panel', views.Panel.as_view()),
-    path('', include('api.urls'))
+    path('new', views.NewMeeting.as_view()),
+    path('', include('api.urls')),
+    path('login', views.Login.as_view()),
+    path('signup', views.SignUp.as_view()),
+    path('logout', views.Logout.as_view()),
 ]
