@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>ACME</title>
+  <link href="https://js-practice.nicolasopf.repl.co/general.css" rel="stylesheet" type="text/css" />
+  <link href="https://js-practice.nicolasopf.repl.co/panel/panel.css" rel="stylesheet" type="text/css" />
+  <link href="https://js-practice.nicolasopf.repl.co/panel/new_style.css" rel="stylesheet" type="text/css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Andada+Pro:ital@0;1&family=Hahmlet:wght@500&display=swap" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body class="body">
+  <h1 class="firsttitle"> Meetings Management </h1>
+  <nav>
+	<a href="https://js-practice.nicolasopf.repl.co/panel/panel.html">My Meetings</a>
+	<a href="https://js-practice.nicolasopf.repl.co/panel/new.html">New Meeting</a>
+	<a href="#">Log Out</a>
+	<a href="#"></a>
+	<div class="animation start-home"></div>
+	</nav>
+  <!-- Content of the page -->
+
+  <div class="wrapper">
+	<div class="filter_form">
+	  <form role="form" method="get">
+		<table class="filters">
+		  <tr>
+			<th class="col1">
+			  <label>Rooms</label><br><br>
+			  <select id="room_select">
+				<option>Any</option>
+				</select>
+			  </th>
+			<th class="col2">
+			  <label>Minimum Capacity</label><br><br>
+			  <select id="capacity_select">
+				<option>All</option>
+				</select>
+			  </th>
+			<th class="col3">
+			  <label>Starts at:</label><br>
+			  <input type="datetime-local" id="starts_at">
+			  </th>
+			<th class="col4">
+			  <label>Ends at:</label><br>
+			  <input type="time" id="ends_at">
+			  </th>
+			<th class="col5">
+			  <button type="button" onclick="sendPost()">Search</button>
+			</th>
+			</tr>
+		  </table>
+		</form>
+	  </div>
+
+	<!-- List of reservations made -->
+	<table class="meetings" id="table" border="1">
+	  <tr>
+		<th>Room</th>
+		<th>Starts at</th>
+		<th>Ends at</th>
+		<th>Settings</th>
+		</tr>
+	  <tr>
+		<td>Content</td>
+		<td>Content</td>
+		<td>Content</td>
+		<td>Content</td>
+		</tr>
+	  </table>
+	</div>
+  <script src="https://js-practice.nicolasopf.repl.co/panel/new_script.js"></script>
+</body>
+</html>
