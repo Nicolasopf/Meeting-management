@@ -29,7 +29,7 @@ class Reservation(Base):
     ''' Reservation table, must be vinculated to an user '''
     id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
     room = models.ForeignKey(Room, on_delete=models.CASCADE)
-    user = models.ForeignKey(User , on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     starts_at = models.DateTimeField()
     ends_at = models.DateTimeField()
     cancelled = models.BooleanField(default=False)
