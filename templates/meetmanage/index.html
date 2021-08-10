@@ -4,39 +4,37 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <title>ACME</title>
+    <link href="https://js-practice.nicolasopf.repl.co/general.css" rel="stylesheet" type="text/css" />
     <link href="https://js-practice.nicolasopf.repl.co/style.css" rel="stylesheet" type="text/css" />
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Andada+Pro:ital@0;1&family=Hahmlet:wght@500&display=swap" rel="stylesheet">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   </head>
-  <body>
-	<h3 class="noinherit">Meetings Management</h3>
+  <body class="body">
+	<h1 class="firsttitle"> Meetings Management </h1>
 	<p id="description"> Reserve rooms and schedule your meetings</p>
     <div class="wrapper fadeInDown">
       <div id="formContent">
-        <!-- Tabs Titles -->
-
         <!-- Icon -->
         <div class="fadeIn first">
           <img src="https://cdn.dribbble.com/users/128315/screenshots/2605603/ridebot2.gif" id="icon" alt="User Icon" />
         </div>
-
 		<!-- Login Form -->
-		{% if messages %}
-		  {% for message in messages %}
-		    <div class="alert {% if message.tags %} alert-{{ message.tags }}{% endif %}">{{ message }}!</div>
-		  {% endfor %}
-		{% endif %}
-        <form id="login" method="post" action="/panel">
+		{% for message in messages %}
+		<div class="alert {% if message.tags %} alert-{{ message.tags }}{% endif %}">{{ message }}!</div>
+		{% endfor %}
+        <form id="login" method="post" action="/login">
 		  {% csrf_token %}
-		  {{ login }}
+		  {{ login_form }}
           <input type="submit" class="fadeIn fourth" value="Log In">
         </form>
-
         <!-- Sign up Form -->
-        <form id="signup" method="post" action="/panel">
+        <form id="signup" method="post" action="/signup">
 		  {% csrf_token %}
-		  {{ signup }}
+		  {{ signup_form }}
           <input type="submit" class="fadeIn fourth" value="Sign up">
         </form>
         <!-- Remind Password -->
